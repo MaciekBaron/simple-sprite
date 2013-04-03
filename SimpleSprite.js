@@ -96,35 +96,39 @@ DEALINGS IN THE SOFTWARE.
 
 	SimpleSprite.Sprite.prototype.animate = function () {
 		if (animating == true) {
-			if (this.pingpong) {
-				if (pingpong_direction == 1) {
-					current_frame++;
-					if (current_frame == this.total_frames) {
-						current_frame -= 2;
-						pingpong_direction = 0;
+			if (this.loops != 0 && current_loop == this.loops) {
+				this.stopAnimation();
+			} else {
+				if (this.pingpong) {
+					if (pingpong_direction == 1) {
+						current_frame++;
+						if (current_frame == this.total_frames) {
+							current_frame -= 2;
+							pingpong_direction = 0;
+						}
+					} else {
+						current_frame--;
+						if (current_frame == -1) {
+							current_frame = 1;
+							pingpong_direction = 1;
+
+							current_loop++;
+
+							if (typeof this.callback === "function") this.callback();
+						}
 					}
 				} else {
-					current_frame--;
-					if (current_frame == -1) {
-						current_frame = 1;
-						pingpong_direction = 1;
-
+					current_frame++;
+					if (current_frame == this.total_frames) {
+						if (typeof this.callback === "function") this.callback();
 						current_loop++;
 
-						if (typeof this.callback === "function") this.callback();
+						current_frame = 0;
 					}
 				}
-			} else {
-				current_frame++;
-				if (current_frame == this.total_frames) {
-					if (typeof this.callback === "function") this.callback();
-					current_loop++;
-
-					current_frame = 0;
-				}
+				var self = this;
+				timeout = setTimeout(function() { self.animate() }, this.interval);
 			}
-			var self = this;
-			timeout = setTimeout(function() { self.animate() }, this.interval);
 		} else {
 			current_frame = 0;
 		}
