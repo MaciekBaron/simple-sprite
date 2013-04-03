@@ -71,6 +71,18 @@ The SimpleSprite object has three self-explainatory functions that control the a
     
 `resetAnimation()` will return to the first frame of the animation, it will neither pause or play the animation.
 
+### SimpleSpriteContainer
+If you also want a simple image container, you can include the optional `SimpleSpriteContainer.js` script. It is a 
+very simple script that holds all your image objects. This is how it works:
+
+    var mySpriteContainer = new SimpleSprite.ImageContainer("./img-location/");
+    
+    // Get file named 'sprite.png'
+    mySpriteContainer.getImage('sprite.png');
+    
+Whenever you call `getImage(filename)`, the script will check whether we have already loaded that file and return it. 
+This means that you can always call `getImage(filename)` and it won't reload the file, just return the "cached" file.
+
 ### Tips and suggestions
 If you are working on a "topdown" game and want your character to face different directions, you can prepare 
 several rows of animations in one file, and then change the row in your sprite like so:
