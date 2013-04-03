@@ -30,7 +30,9 @@ DEALINGS IN THE SOFTWARE.
 	SimpleSprite.Sprite.prototype.changeToState = function(name) {
 		if (this.states != undefined && this.states[name] != undefined) {
 			for (var attr in this.states[name]) {
-				this[attr] = this.states[name][attr];
+				if (this.hasOwnProperty(attr)) {
+					this[attr] = this.states[name][attr];
+				}
 			}
 			this.currentState = name;
 		}
