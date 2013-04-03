@@ -28,13 +28,20 @@ DEALINGS IN THE SOFTWARE.
 		this.imageLocation = imageLocation;
 	}
 
-	SimpleSprite.ImageContainer.prototype.getImage = function (filename) {
+	SimpleSprite.ImageContainer.prototype.getImage = function (filename, onLoadCallback) {
 		if (container[filename] == undefined) {
 			var img = new Image();
 			img.src = this.imageLocation + filename;
 
+			if (typeof onLoadCallback == "function") {
+				img.onload = onLoadCallback;
+			}
+
 			return img;
 		} else {
+			if (typeof onLoadCallback == "function") {
+				onLoadCallback();
+			}
 			return container[filename];
 		}
 	}
