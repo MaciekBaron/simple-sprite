@@ -127,13 +127,11 @@ DEALINGS IN THE SOFTWARE.
 							current_frame = 0;
 						}
 					}
-					var self = this;
-					timeout = setTimeout(function() { self.animate() }, this.interval);
+					timeout = setTimeout((function() { this.animate(); }).bind(this), this.interval);
 				}
 			} else {
 				current_frame = 0;
 			}
-			return this;
 		}
 	}
 })(window.SimpleSprite = window.SimpleSprite || {});
