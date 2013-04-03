@@ -38,15 +38,15 @@
     </div>
     <p>Sprite taken from <a href="http://www.sfml-dev.org/wiki/en/sources/spritesheets">here</a></p>
     <script src="../SimpleSprite.js"></script>
+    <script src="../SimpleSpriteContainer.js"></script>
     <script>
       var myCanvas = document.getElementById("mycanvas");
       var context = myCanvas.getContext("2d");
-      var myImage = new Image();
-      myImage.src = "./img/chanta_running.png";
-      var mySprite = new SimpleSprite.Sprite({spritesheet: myImage, height: 102, width: 102, frames: 13});
+      var myImageContainer = new SimpleSprite.ImageContainer("./img/");
+      var mySprite = new SimpleSprite.Sprite({spritesheet: myImageContainer.getImage("chanta_running.png"), height: 102, width: 102, frames: 13});
       mySprite.startAnimation();
 
-      myImage.onload = function () {
+      myImageContainer.getImage("chanta_running.png").onload = function () {
         setInterval(function () {
           myCanvas.width = myCanvas.width;
           mySprite.draw(context);
