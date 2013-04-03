@@ -56,8 +56,10 @@ DEALINGS IN THE SOFTWARE.
 		return this;
 	}
 
-	SimpleSprite.Sprite.prototype.draw = function (context) {
-		context.drawImage(this.spritesheet, this.current_frame*this.dw, (this.row-1)*this.dh, this.dw, this.dh, this.x, this.y, this.dw, this.dh);
+	SimpleSprite.Sprite.prototype.draw = function (context, x, y) {
+		var dx = (typeof x == "number") ? x : this.x;
+		var dy = (typeof y == "number") ? y : this.y;
+		context.drawImage(this.spritesheet, this.current_frame*this.dw, (this.row-1)*this.dh, this.dw, this.dh, dx, dy, this.dw, this.dh);
 		return this;
 	}
 
