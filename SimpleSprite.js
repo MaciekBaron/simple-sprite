@@ -51,87 +51,89 @@ DEALINGS IN THE SOFTWARE.
 	}
 
 
-	SimpleSprite.Sprite.prototype.setLocation = function (x, y) {
-		this.x = x;
-		this.y = y;
+	SimpleSprite.Sprite.prototype = {
+		setLocation: function (x, y) {
+			this.x = x;
+			this.y = y;
 
-		return this;
-	}
+			return this;
+		},
 
-	SimpleSprite.Sprite.prototype.draw = function (context, x, y) {
-		var dx = (typeof x == "number") ? x : this.x;
-		var dy = (typeof y == "number") ? y : this.y;
-		context.drawImage(this.spritesheet, current_frame*this.dw, (this.row-1)*this.dh, this.dw, this.dh, dx, dy, this.dw, this.dh);
-		return this;
-	}
+		draw: function (context, x, y) {
+			var dx = (typeof x == "number") ? x : this.x;
+			var dy = (typeof y == "number") ? y : this.y;
+			context.drawImage(this.spritesheet, current_frame*this.dw, (this.row-1)*this.dh, this.dw, this.dh, dx, dy, this.dw, this.dh);
+			return this;
+		},
 
-	SimpleSprite.Sprite.prototype.isAnimating = function () {
-		return animating;
-	}
+		isAnimating: function () {
+			return animating;
+		},
 
-	SimpleSprite.Sprite.prototype.startAnimation = function (callback) {
-		if (!animating) {
-			animating = true;
-			this.animate();
-		}
+		startAnimation: function (callback) {
+			if (!animating) {
+				animating = true;
+				this.animate();
+			}
 
-		if (typeof callback == "function") {
-			this.callback = callback;
-		}
+			if (typeof callback == "function") {
+				this.callback = callback;
+			}
 
-		return this;
-	}
+			return this;
+		},
 
-	SimpleSprite.Sprite.prototype.stopAnimation = function () {
-		animating = false;
-		clearTimeout(timeout);
+		stopAnimation: function () {
+			animating = false;
+			clearTimeout(timeout);
 
-		return this;
-	}
+			return this;
+		},
 
-	SimpleSprite.Sprite.prototype.resetAnimation = function () {
-		current_frame = 0;
-		return this;
-	}
+		resetAnimation: function () {
+			current_frame = 0;
+			return this;
+		},
 
-	SimpleSprite.Sprite.prototype.animate = function () {
-		if (animating == true) {
-			if (this.loops != 0 && current_loop == this.loops) {
-				this.stopAnimation();
-			} else {
-				if (this.pingpong) {
-					if (pingpong_direction == 1) {
-						current_frame++;
-						if (current_frame == this.total_frames) {
-							current_frame -= 2;
-							pingpong_direction = 0;
+		animate: function () {
+			if (animating == true) {
+				if (this.loops != 0 && current_loop == this.loops) {
+					this.stopAnimation();
+				} else {
+					if (this.pingpong) {
+						if (pingpong_direction == 1) {
+							current_frame++;
+							if (current_frame == this.total_frames) {
+								current_frame -= 2;
+								pingpong_direction = 0;
+							}
+						} else {
+							current_frame--;
+							if (current_frame == -1) {
+								current_frame = 1;
+								pingpong_direction = 1;
+
+								current_loop++;
+
+								if (typeof this.callback === "function") this.callback();
+							}
 						}
 					} else {
-						current_frame--;
-						if (current_frame == -1) {
-							current_frame = 1;
-							pingpong_direction = 1;
-
+						current_frame++;
+						if (current_frame == this.total_frames) {
+							if (typeof this.callback === "function") this.callback();
 							current_loop++;
 
-							if (typeof this.callback === "function") this.callback();
+							current_frame = 0;
 						}
 					}
-				} else {
-					current_frame++;
-					if (current_frame == this.total_frames) {
-						if (typeof this.callback === "function") this.callback();
-						current_loop++;
-
-						current_frame = 0;
-					}
+					var self = this;
+					timeout = setTimeout(function() { self.animate() }, this.interval);
 				}
-				var self = this;
-				timeout = setTimeout(function() { self.animate() }, this.interval);
+			} else {
+				current_frame = 0;
 			}
-		} else {
-			current_frame = 0;
+			return this;
 		}
-		return this;
 	}
 })(window.SimpleSprite = window.SimpleSprite || {});
