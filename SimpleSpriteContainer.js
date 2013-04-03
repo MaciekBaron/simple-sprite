@@ -37,7 +37,11 @@ DEALINGS IN THE SOFTWARE.
 		}
 
 		if (typeof onLoadCallback == "function") {
-			container[filename].addEventListener('load', onLoadCallback, false);
+			if (typeof container[filename].attachEvent == "function") {
+				container[filename].attachEvent('onload', onLoadCallback);
+			} else {
+				container[filename].addEventListener('load', onLoadCallback, false);
+			}
 		}
 		return container[filename];
 	}
