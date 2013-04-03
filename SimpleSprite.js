@@ -27,6 +27,14 @@ DEALINGS IN THE SOFTWARE.
 		throw new Error(err);
 	};
 
+	// Private variables
+
+	var current_frame = 0;
+	var current_loop = 0;
+	var animating = false;
+	var pingpong_direction = 1; // 1 = incrementing frame count, 0 = decrementing frame count
+	var timeout = null;
+
 	SimpleSprite.Sprite = function (settings, callback) {
 
 		this.spritesheet = (settings.spritesheet) ? settings.spritesheet : throwError("No spritesheet provided");
@@ -40,12 +48,6 @@ DEALINGS IN THE SOFTWARE.
 		this.pingpong = (settings.pingpong) ? settings.pingpong : false;
 		this.loops = (settings.loops) ? settings.loops : 0; // number of loops (0 = infinite)
 		this.callback = callback;
-
-		this.current_frame = 0;
-		this.current_loop = 0;
-		this.animating = false;
-		this.pingpong_direction = 1; // 1 = incrementing frame count, 0 = decrementing frame count
-		this.timeout = null;
 	}
 
 
@@ -59,17 +61,17 @@ DEALINGS IN THE SOFTWARE.
 	SimpleSprite.Sprite.prototype.draw = function (context, x, y) {
 		var dx = (typeof x == "number") ? x : this.x;
 		var dy = (typeof y == "number") ? y : this.y;
-		context.drawImage(this.spritesheet, this.current_frame*this.dw, (this.row-1)*this.dh, this.dw, this.dh, dx, dy, this.dw, this.dh);
+		context.drawImage(this.spritesheet, current_frame*this.dw, (this.row-1)*this.dh, this.dw, this.dh, dx, dy, this.dw, this.dh);
 		return this;
 	}
 
 	SimpleSprite.Sprite.prototype.isAnimating = function () {
-		return this.animating;
+		return animating;
 	}
 
 	SimpleSprite.Sprite.prototype.startAnimation = function (callback) {
-		if (!this.animating) {
-			this.animating = true;
+		if (!animating) {
+			animating = true;
 			this.animate();
 		}
 
@@ -81,50 +83,50 @@ DEALINGS IN THE SOFTWARE.
 	}
 
 	SimpleSprite.Sprite.prototype.stopAnimation = function () {
-		this.animating = false;
-		clearTimeout(this.timeout);
+		animating = false;
+		clearTimeout(timeout);
 
 		return this;
 	}
 
 	SimpleSprite.Sprite.prototype.resetAnimation = function () {
-		this.current_frame = 0;
+		current_frame = 0;
 		return this;
 	}
 
 	SimpleSprite.Sprite.prototype.animate = function () {
-		if (this.animating == true) {
+		if (animating == true) {
 			if (this.pingpong) {
-				if (this.pingpong_direction == 1) {
-					this.current_frame++;
-					if (this.current_frame == this.total_frames) {
-						this.current_frame -= 2;
-						this.pingpong_direction = 0;
+				if (pingpong_direction == 1) {
+					current_frame++;
+					if (current_frame == this.total_frames) {
+						current_frame -= 2;
+						pingpong_direction = 0;
 					}
 				} else {
-					this.current_frame--;
-					if (this.current_frame == -1) {
-						this.current_frame = 1;
-						this.pingpong_direction = 1;
+					current_frame--;
+					if (current_frame == -1) {
+						current_frame = 1;
+						pingpong_direction = 1;
 
-						this.current_loop++;
+						current_loop++;
 
 						if (typeof this.callback === "function") this.callback();
 					}
 				}
 			} else {
-				this.current_frame++;
-				if (this.current_frame == this.total_frames) {
+				current_frame++;
+				if (current_frame == this.total_frames) {
 					if (typeof this.callback === "function") this.callback();
-					this.current_loop++;
+					current_loop++;
 
-					this.current_frame = 0;
+					current_frame = 0;
 				}
 			}
 			var self = this;
-			this.timeout = setTimeout(function() { self.animate() }, this.interval);
+			timeout = setTimeout(function() { self.animate() }, this.interval);
 		} else {
-			this.current_frame = 0;
+			current_frame = 0;
 		}
 		return this;
 	}
