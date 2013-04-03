@@ -1,0 +1,47 @@
+<html>
+  <head>
+   <title>SimpleSprite demo</title>
+   <style>
+    body {
+      padding: 2em;
+    }
+    canvas {
+      border: 1px dotted black;
+      box-shadow: 0px 0px 8px rgba(0,0,0,0.5);
+    }
+
+    .controls {
+      margin-top: 1em;
+    }
+
+    button {
+      font-family: Monospace;
+    }
+   </style>
+  </head>
+  <body>
+    <h1>Simple SimpleSprite demo</h1>
+    <canvas id="mycanvas" width="102" height="102"></canvas>
+    <div class="controls">
+      <button onclick="mySprite.stopAnimation()">stopAnimation()</button>
+      <button onclick="mySprite.startAnimation()">startAnimation()</button>
+      <button onclick="mySprite.resetAnimation()">resetAnimation()</button>
+    </div>
+    <script src="../SimpleSprite.js"></script>
+    <script>
+      var myCanvas = document.getElementById("mycanvas");
+      var context = myCanvas.getContext("2d");
+      var myImage = new Image();
+      myImage.src = "./img/chanta_running.png";
+      var mySprite = new SimpleSprite.Sprite({spritesheet: myImage, height: 102, width: 102, frames: 13});
+      mySprite.startAnimation();
+
+      myImage.onload = function () {
+        setInterval(function () {
+          myCanvas.width = myCanvas.width;
+          mySprite.draw(context);
+        }, 100);
+      };
+    </script>
+  </body>
+</html>

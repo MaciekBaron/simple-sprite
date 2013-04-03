@@ -33,7 +33,7 @@ DEALINGS IN THE SOFTWARE.
 		this.x = (settings.x) ? settings.x : 0;	// Destination x
 		this.y = (settings.y) ? settings.y : 0; // Destination y
 		this.dw = (settings.width) ? settings.width : throwError("No width provided");	// Width of the frame
-		this.dh = (settings.height) ? settings.width : throwError("No height provided");// Height of the frame
+		this.dh = (settings.height) ? settings.height : throwError("No height provided");// Height of the frame
 		this.row = (settings.row) ? settings.row : 1;	// Row in spritesheet
 		this.interval = (settings.interval) ? settings.interval : 100; // Interval between frames
 		this.total_frames = (settings.frames) ? settings.frames : throwError("No frame count provided");
@@ -57,9 +57,7 @@ DEALINGS IN THE SOFTWARE.
 	}
 
 	SimpleSprite.Sprite.prototype.draw = function (context) {
-
-		context.drawImage(this.spritesheet, this.current_frame*this.dw, this.row*this.dh, this.dw, this.dh, /*Math.floor(this.x / 4) * 4*/ this.x - (this.dw/2), /*Math.floor(this.y / 2) * 2*/ this.y - this.dh, this.dw, this.dh);
-
+		context.drawImage(this.spritesheet, this.current_frame*this.dw, (this.row-1)*this.dh, this.dw, this.dh, this.x, this.y, this.dw, this.dh);
 		return this;
 	}
 
