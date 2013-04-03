@@ -33,18 +33,12 @@ DEALINGS IN THE SOFTWARE.
 			var img = new Image();
 			img.src = this.imageLocation + filename;
 
-			if (typeof onLoadCallback == "function") {
-				img.onload = onLoadCallback;
-			}
-
 			container[filename] = img;
-
-			return container[filename];
-		} else {
-			if (typeof onLoadCallback == "function") {
-				container[filename].onload = onLoadCallback;
-			}
-			return container[filename];
 		}
+
+		if (typeof onLoadCallback == "function") {
+			container[filename].addEventListener('load', onLoadCallback, false);
+		}
+		return container[filename];
 	}
 })(window.SimpleSprite = window.SimpleSprite || {});

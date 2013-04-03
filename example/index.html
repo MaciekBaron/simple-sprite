@@ -46,12 +46,12 @@
       var mySprite = new SimpleSprite.Sprite({spritesheet: myImageContainer.getImage("chanta_running.png"), height: 102, width: 102, frames: 13});
       mySprite.startAnimation();
 
-      myImageContainer.getImage("chanta_running.png").onload = function () {
+      myImageContainer.getImage("chanta_running.png", function () {
         setInterval(function () {
           myCanvas.width = myCanvas.width;
           mySprite.draw(context);
         }, 100);
-      };
+      });
     </script>
   </body>
 </html>
