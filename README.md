@@ -1,9 +1,9 @@
 Simple Sprite
 =============
 
-SimpleSprite is a basic sprite library used for spritesheet based animations that I have 
-developed during my first GameHack event and have been using it ever since whenever I work 
-on a 2D sprite-based game during such events (i.e. most of the time). If you don't need anything 
+SimpleSprite is a basic sprite library used for framerate independent spritesheet based animations 
+that I have developed during my first GameHack event and have been using it ever since whenever I 
+work on a 2D sprite-based game during such events (i.e. most of the time). If you don't need anything 
 fancy and just want to animate a sprite, this is the library for you.
 
 Tutorial
@@ -19,10 +19,10 @@ First, create an an image and a Sprite:
                       frames: 4
      });
 
-This is the most basic example where you set the spritesheet file, then the width and height of 
-each frame, and finally the total number of frames. Note that the library does not take care of 
-loading files - you have to load the files yourself, but thanks to this you can use the same file 
-with multiple sprites.
+This is the most basic example where you set the spritesheet file, then the width and height of each 
+frame, and finally the total number of frames. Note that the library does not take care of loading 
+files - you have to load the files yourself, but thanks to this you can use the same file with multiple 
+sprites.
 
 There are other settings you can use in the Sprite's "constructor":
 
