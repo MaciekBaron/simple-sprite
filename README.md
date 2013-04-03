@@ -35,8 +35,7 @@ facing multiple directions), defaults to 1
 forth), defaults to `false`
 * `loop` - defines the number of loops the animation should perform, defaults to 0 (infinite)
 
-The second argument of the "constructor" can be a callback function that is called after the animation 
-has finished.
+The second argument of the "constructor" can be a callback function that is called after every loop.
 
 After we've created our Sprite, we want to start animating it:
     
