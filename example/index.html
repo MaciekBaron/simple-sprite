@@ -32,26 +32,44 @@
     </div>
     <canvas id="mycanvas" width="102" height="102"></canvas>
     <div class="controls">
-      <button onclick="mySprite.stopAnimation()">stopAnimation()</button>
-      <button onclick="mySprite.startAnimation()">startAnimation()</button>
-      <button onclick="mySprite.resetAnimation()">resetAnimation()</button>
+      <div class="row">
+        <button onclick="mySprite.stopAnimation()">stopAnimation()</button>
+        <button onclick="mySprite.startAnimation()">startAnimation()</button>
+        <button onclick="mySprite.resetAnimation()">resetAnimation()</button>
+      </div>
+      <div class="row">
+        <button onclick='mySprite.changeToState("fastState")'>changeToState("fastState")</button>
+        <button onclick='mySprite.changeToState("slowState")'>changeToState("fastState")</button>
+      </div>
     </div>
     <p>Sprite taken from <a href="http://www.sfml-dev.org/wiki/en/sources/spritesheets">here</a></p>
     <script src="../SimpleSprite.js"></script>
     <script src="../SimpleSpriteContainer.js"></script>
+    <script src="../SimpleSpriteStates.js"></script>
     <script>
       var myCanvas = document.getElementById("mycanvas");
       var context = myCanvas.getContext("2d");
       var myImageContainer = new SimpleSprite.ImageContainer("./img/");
       var mySprite = new SimpleSprite.Sprite({spritesheet: myImageContainer.getImage("chanta_running.png"), height: 102, width: 102, frames: 13});
-      mySprite.startAnimation();
 
       myImageContainer.getImage("chanta_running.png", function () {
+        mySprite.startAnimation();
         setInterval(function () {
           myCanvas.width = myCanvas.width;
           mySprite.draw(context);
         }, 100);
       });
+
+      var simpleState = new SimpleSprite.StateTemplate({
+        slowState: {
+          interval: 300
+        },
+        fastState: {
+          interval: 50
+        }
+      });
+
+      mySprite.inheritStates(simpleState);
     </script>
   </body>
 </html>

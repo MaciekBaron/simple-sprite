@@ -71,6 +71,18 @@ The SimpleSprite object has three self-explainatory functions that control the a
     
 `resetAnimation()` will return to the first frame of the animation, it will neither pause or play the animation.
 
+### Tips and suggestions
+If you are working on a "topdown" game and want your character to face different directions, you can prepare 
+several rows of animations in one file, and then change the row in your sprite like so:
+
+    mySprite.row = 2; // Left
+    mySprite.row = 3; // Right
+    // etc..
+
+You could also try using the SpriteState module (more about it below).
+
+Optional modules
+----------------
 ### SimpleSpriteContainer
 If you also want a simple image container, you can include the optional `SimpleSpriteContainer.js` script. It is a 
 very simple script that holds all your image objects. This is how it works:
@@ -89,14 +101,32 @@ You can also define a callback which is called once the image is loaded:
           console.log("The image has been loaded!");
      });
 
-### Tips and suggestions
-If you are working on a "topdown" game and want your character to face different directions, you can prepare 
-several rows of animations in one file, and then change the row in your sprite like so:
+### SimpleSpriteStates
+This module adds the ability to create certain states for your sprite and switch between them. You can also create state
+"templates" from which your sprite can iherit available states. Here's an example that can explain more:
 
-    mySprite.row = 2; // Left
-    mySprite.row = 3; // Right
-    // etc..
-    
+    var simpleStateTemplate = new SimpleSprite.StateTemplate({
+        slowState: {
+            interval: 300
+        },
+        fastState: {
+            interval: 50
+        }
+    });
+
+    mySprite.inheritStates(simpleStateTemplate);
+
+This creates a state template with two possible states, `slowState` and `fastState`. As you can see both change the 
+interval between frames. You can change any attribute of your Sprite object using those states. Sprites can inherit 
+states from templates or from other sprites.
+
+To change the state of the sprite simply call `changeToState(name)`:
+
+    mySprite.changeToState("fastState"); // Speeds up the animation
+    console.log(mySprite.currentState);  // Returns "fastState"
+
+A good use of states is to change the current row sued from the spritesheet depending on which way the character is 
+facing.
 
 Demo
 ----
