@@ -83,6 +83,12 @@ very simple script that holds all your image objects. This is how it works:
 Whenever you call `getImage(filename)`, the script will check whether we have already loaded that file and return it. 
 This means that you can always call `getImage(filename)` and it won't reload the file, just return the "cached" file.
 
+You can also define a callback which is called once the image is loaded:
+
+     mySpriteContainer.getImage('sprite.png', function () {
+          console.log("The image has been loaded!");
+     });
+
 ### Tips and suggestions
 If you are working on a "topdown" game and want your character to face different directions, you can prepare 
 several rows of animations in one file, and then change the row in your sprite like so:
