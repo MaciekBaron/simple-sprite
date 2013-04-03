@@ -1,10 +1,11 @@
 Simple Sprite
 =============
 
-**SimpleSprite** is a basic sprite library used for framerate independent spritesheet based animations 
-that I have developed during my first [GameHack](http://gamehack.co.uk/) event and have been using 
-it ever since whenever I work on a 2D sprite-based game during such events (i.e. most of the time). 
-If you don't need anything fancy and just want to animate a sprite, this is the library for you.
+**SimpleSprite** is a lightweight sprite library used for [Canvas](http://en.wikipedia.org/wiki/Canvas_element) 
+framerate independent spritesheet based animations that I have developed during my first 
+[GameHack](http://gamehack.co.uk/) event and have been using it ever since whenever I work on a 2D sprite-based 
+game during such events (i.e. most of the time). If you don't need anything fancy and just want to animate a 
+sprite, this is the library for you.
 
 Tutorial
 --------
@@ -127,6 +128,21 @@ To change the state of the sprite simply call `changeToState(name)`:
 
 A good use of states is to change the current row sued from the spritesheet depending on which way the character is 
 facing.
+
+Q&A
+---
+###What do you mean by "framerate independent"?
+It doesn't matter how many times you draw to the canvas, the speed of the animation won't change. That's because the 
+frames of the animation are switched independently.
+
+###What are the drawbacks of such approach?
+You need to take care of syncing the animations (if you want them to be perfectly synced with each other).
+
+###Is this library suitable for game X?
+The library is very simple and lightweight and thus can fit any game with sprite based graphics.
+
+###What are the dependencies?
+There are no dependencies, other than having a browser that supports the Canvas element of course.
 
 Demo
 ----
