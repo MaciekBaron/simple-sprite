@@ -8,6 +8,7 @@ If you don't need anything fancy and just want to animate a sprite, this is the 
 
 Tutorial
 --------
+### Creating sprites
 First, create an an image and a Sprite:
 
      var myFile = new Image();
@@ -39,7 +40,7 @@ has finished.
 
 After we've created our Sprite, we want to start animating it:
     
-    mySprite.startAnimating();
+    mySprite.startAnimation();
     
 Note that the animation is indipendent from your drawing, i.e. it happens even if you're not drawing the 
 sprite. This is a simplification that can have its drawbacks (e.g. uneven frames) but shouldn't cause any 
@@ -51,6 +52,34 @@ Next we need to draw our sprite:
     
 Where `context` is a 2D Canvas context that you get by calling `yourCanvasElement.getContext("2d")`. Note 
 that `draw()` should be called within your rendering loop, so that the sprite is redrawn on every frame.
+
+### Moving sprites
+Obviously sprites that just sit there and don't move aren't very useful. We can change the location of our 
+sprite by simple calling the `setLocation(x, y)` function:
+
+    mySprite.setLocation(123, 321);
+
+If you prefer, you can set the destination when drawing the sprite:
+
+    mySprite.draw(context, x, y);
+    
+### Controling the animation
+The SimpleSprite object has three self-explainatory functions that control the animation:
+
+    mySprite.startAnimation();
+    mySprite.stopAnimation();
+    mySprite.resetAnimation();
+    
+`resetAnimation()` will return to the first frame of the animation, it will neither pause or play the animation.
+
+### Tips and suggestions
+If you are working on a "topdown" game and want your character to face different directions, you can prepare 
+several rows of animations in one file, and then change the row in your sprite like so:
+
+    mySprite.row = 2; // Left
+    mySprite.row = 3; // Right
+    // etc..
+    
 
 Demo
 ----
