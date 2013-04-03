@@ -37,10 +37,12 @@ DEALINGS IN THE SOFTWARE.
 				img.onload = onLoadCallback;
 			}
 
-			return img;
+			container[filename] = img;
+
+			return container[filename];
 		} else {
 			if (typeof onLoadCallback == "function") {
-				onLoadCallback();
+				container[filename].onload = onLoadCallback;
 			}
 			return container[filename];
 		}
