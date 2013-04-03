@@ -17,10 +17,19 @@
     button {
       font-family: Monospace;
     }
+
+    .image-container {
+      border: 1px dotted black;
+      overflow-x: scroll;
+      width: 500px;
+    }
    </style>
   </head>
   <body>
     <h1>Simple SimpleSprite demo</h1>
+    <div class="image-container">
+      <img src="./img/chanta_running.png" />
+    </div>
     <canvas id="mycanvas" width="102" height="102"></canvas>
     <div class="controls">
       <button onclick="mySprite.stopAnimation()">stopAnimation()</button>
