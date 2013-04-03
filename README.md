@@ -51,3 +51,7 @@ Next we need to draw our sprite:
     
 Where `context` is a 2D Canvas context that you get by calling `yourCanvasElement.getContext("2d")`. Note 
 that `draw()` should be called within your rendering loop, so that the sprite is redrawn on every frame.
+
+Demo
+----
+[Really (really) simple demo](http://htmlpreview.github.com/?http://github.com/MaciekBaron/simple-sprite/blob/master/example/index.html)
