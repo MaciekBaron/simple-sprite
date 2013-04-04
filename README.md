@@ -1,4 +1,4 @@
-Simple Sprite
+SimpleSprite
 =============
 
 **SimpleSprite** is a lightweight sprite library used for [Canvas](http://en.wikipedia.org/wiki/Canvas_element) 
@@ -161,3 +161,7 @@ There are no dependencies, other than having a browser that supports the Canvas 
 Demo
 ----
 [Really (really) simple demo](http://htmlpreview.github.com/?http://github.com/MaciekBaron/simple-sprite/blob/master/example/index.html)
+
+Licence
+-------
+MIT
