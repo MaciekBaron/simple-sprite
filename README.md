@@ -24,7 +24,7 @@ First, create an an image and a Sprite:
 This is the most basic example where you set the spritesheet file, then the width and height of each 
 frame, and finally the total number of frames. Note that the library does not take care of loading 
 files - you have to load the files yourself, but thanks to this you can use the same file with multiple 
-sprites.
+sprites. You can also use the optional [SimpleSpriteContainer](#simplespritecontainer).
 
 There are other settings you can use in the Sprite's "constructor":
 
