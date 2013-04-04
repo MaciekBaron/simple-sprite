@@ -27,6 +27,14 @@ DEALINGS IN THE SOFTWARE.
 		return this;
 	}
 
+	SimpleSprite.Sprite.prototype.learnStates = function(source) {
+		if (source.states != undefined) {
+			for (var attr in source.states) {
+				this.states[attr] = source.states[attr];
+			}
+		}
+	}
+
 	SimpleSprite.Sprite.prototype.changeToState = function(name) {
 		if (this.states != undefined && this.states[name] != undefined) {
 			for (var attr in this.states[name]) {
