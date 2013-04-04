@@ -131,6 +131,18 @@ To change the state of the sprite simply call `changeToState(name)`:
 A good use of states is to change the current row sued from the spritesheet depending on which way the character is 
 facing.
 
+Of course your states can be more complicated than in the above example:
+
+    var simpleStateTemplate = new SimpleSprite.StateTemplate({
+        fancyState: {
+            x: (myCanvas.width-100),
+            y: 0,
+            row: 2,
+            interval: 300,
+            pingpong: true
+        }
+    });
+
 Q&A
 ---
 ###What do you mean by "framerate independent"?
