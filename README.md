@@ -104,7 +104,9 @@ You can also define a callback which is called once the image is loaded:
 
 ### SimpleSpriteStates
 This module adds the ability to create certain states for your sprite and switch between them. You can also create state
-"templates" from which your sprite can iherit available states. Here's an example that can explain more:
+"templates" from which your sprite can iherit available states (note that this overwrites all known states, if you want 
+to add states without overwriting, use `learnStates()`, but remember that this of course still will overwrite states with 
+the same names). Here's an example that can explain more:
 
     var simpleStateTemplate = new SimpleSprite.StateTemplate({
         slowState: {
