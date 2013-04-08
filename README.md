@@ -1,4 +1,4 @@
-Simple Sprite
+SimpleSprite
 =============
 
 **SimpleSprite** is a lightweight sprite library used for [Canvas](http://en.wikipedia.org/wiki/Canvas_element) 
@@ -24,7 +24,7 @@ First, create an an image and a Sprite:
 This is the most basic example where you set the spritesheet file, then the width and height of each 
 frame, and finally the total number of frames. Note that the library does not take care of loading 
 files - you have to load the files yourself, but thanks to this you can use the same file with multiple 
-sprites.
+sprites. You can also use the optional [SimpleSpriteContainer](#simplespritecontainer).
 
 There are other settings you can use in the Sprite's "constructor":
 
@@ -104,7 +104,9 @@ You can also define a callback which is called once the image is loaded:
 
 ### SimpleSpriteStates
 This module adds the ability to create certain states for your sprite and switch between them. You can also create state
-"templates" from which your sprite can iherit available states. Here's an example that can explain more:
+"templates" from which your sprite can iherit available states (note that this overwrites all known states, if you want 
+to add states without overwriting, use `learnStates()`, but remember that this of course still will overwrite states with 
+the same names). Here's an example that can explain more:
 
     var simpleStateTemplate = new SimpleSprite.StateTemplate({
         slowState: {
@@ -129,6 +131,18 @@ To change the state of the sprite simply call `changeToState(name)`:
 A good use of states is to change the current row sued from the spritesheet depending on which way the character is 
 facing.
 
+Of course your states can be more complicated than in the above example:
+
+    var simpleStateTemplate = new SimpleSprite.StateTemplate({
+        fancyState: {
+            x: (myCanvas.width-100),
+            y: 0,
+            row: 2,
+            interval: 300,
+            pingpong: true
+        }
+    });
+
 Q&A
 ---
 ###What do you mean by "framerate independent"?
@@ -147,3 +161,7 @@ There are no dependencies, other than having a browser that supports the Canvas 
 Demo
 ----
 [Really (really) simple demo](http://htmlpreview.github.com/?http://github.com/MaciekBaron/simple-sprite/blob/master/example/index.html)
+
+Licence
+-------
+MIT
