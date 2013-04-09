@@ -4,8 +4,9 @@ SimpleSprite
 **SimpleSprite** is a lightweight sprite library used for [Canvas](http://en.wikipedia.org/wiki/Canvas_element) 
 framerate independent spritesheet based animations that I have developed during my first 
 [GameHack](http://gamehack.co.uk/) event and have been using it ever since whenever I work on a 2D sprite-based 
-game during such events (i.e. most of the time). Its functionality can be extended by using additional modules. 
-If you don't need anything fancy and just want to animate a sprite, this is the library for you.
+game during such events (i.e. most of the time). Its functionality can be extended by using additional 
+[modules](#optional-modules). If you don't need anything fancy and just want to animate a sprite, this is the 
+library for you.
 
 Tutorial
 --------
