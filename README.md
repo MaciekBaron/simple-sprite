@@ -144,6 +144,32 @@ Of course your states can be more complicated than in the above example:
         }
     });
 
+### SimpleSpriteCollection
+This module helps rendering collections of sprites that are connected to each other in some way.
+
+First create a new collection:
+
+    var mySpriteCollection = new SimpleSprite.Collection();
+    
+We then need to add sprites to our collection by using `addSprite(name, sprite)`:
+
+    someSprite.z = 1;
+    
+    someOtherSprite.z = 2;
+    someOtherSprite.offsetX = -10;
+    
+    mySpriteCollection.addSprite("first", someSprite).addSprite("second", someOtherSprite);
+    
+The above code specifies that `someSprite` has a lower "`z`" than `someOtherSprite`, which means it will be 
+drawn before (i.e. behind) `someOtherSprite`. We are also ofsetting `someOtherSprite` by 10 pixels to the left.
+
+Finally, we draw our collection:
+
+    mySpriteCollection.draw(context);
+    
+We can set the location of the collection in the same way we do it with sprites by using `setLocation()` or 
+when calling the `draw()` function.
+
 Q&A
 ---
 ###What do you mean by "framerate independent"?

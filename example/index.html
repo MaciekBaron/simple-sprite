@@ -46,17 +46,21 @@
     <script src="../SimpleSprite.js"></script>
     <script src="../modules/SimpleSpriteContainer.js"></script>
     <script src="../modules/SimpleSpriteStates.js"></script>
+    <script src="../modules/SimpleSpriteCollection.js"></script>
     <script>
       var myCanvas = document.getElementById("mycanvas");
       var context = myCanvas.getContext("2d");
       var myImageContainer = new SimpleSprite.ImageContainer("./img/");
       var mySprite = new SimpleSprite.Sprite({spritesheet: myImageContainer.getImage("chanta_running.png"), height: 102, width: 102, frames: 13});
 
+      var spriteCollection = new SimpleSprite.Collection();
+
       myImageContainer.getImage("chanta_running.png", function () {
         mySprite.startAnimation();
+        spriteCollection.addSprite("main", mySprite);
         setInterval(function () {
           myCanvas.width = myCanvas.width;
-          mySprite.draw(context);
+          spriteCollection.draw(context);
         }, 100);
       });
 
