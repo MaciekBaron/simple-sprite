@@ -29,7 +29,7 @@ DEALINGS IN THE SOFTWARE.
 	}
 
 	SimpleSprite.ImageContainer.prototype.getImage = function (filename, onLoadCallback) {
-		if (container[filename] == undefined) {
+		if (!(filename in container)) {
 			var img = new Image();
 			img.src = this.imageLocation + filename;
 
