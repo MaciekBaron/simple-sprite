@@ -145,7 +145,8 @@ Of course your states can be more complicated than in the above example:
     });
 
 ### SimpleSpriteCollection
-This module helps rendering collections of sprites that are connected to each other in some way.
+This module helps rendering collections of sprites that are connected to each other in some way (think of a character 
+that has a head, torso, legs etc.).
 
 First create a new collection:
 
